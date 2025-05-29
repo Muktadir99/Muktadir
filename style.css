@@ -1,0 +1,57 @@
+/* style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+:root { --primary: #fff7f1; --accent: #fca311; --text: #1f1f1f; --bg: #fffbf4; --grid: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 59.5H.5V0' fill='none' stroke='%23e0e0e0'/%3E%3C/svg%3E"); }
+
+{ margin: 0; padding: 0; box-sizing: border-box; }
+
+
+body { font-family: 'Patrick Hand', cursive; background: var(--grid), var(--bg); color: var(--text); padding: 1rem; line-height: 1.6; }
+
+.container { max-width: 700px; margin: auto; background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); animation: slideIn 1s ease-out; }
+
+header { text-align: center; margin-bottom: 2rem; }
+
+.avatar { width: 130px; height: 130px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 10px #ff9e00; margin-bottom: 0.5rem; }
+
+h1 { font-size: 2rem; color: var(--accent); }
+
+h1 span { display: block; font-size: 1.4rem; color: var(--text); }
+
+.tagline { font-size: 1.2rem; font-weight: bold; }
+
+section, footer { margin-bottom: 2rem; }
+
+h2 { color: var(--accent); font-size: 1.4rem; margin-bottom: 0.5rem; border-bottom: 2px dashed var(--accent); display: inline-block; }
+
+.skill { margin: 0.3rem 0; }
+
+.skill span { display: inline-block; width: 120px; }
+
+.bar { height: 8px; border-radius: 5px; background: lightgray; position: relative; overflow: hidden; }
+
+.bar::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; border-radius: 5px; animation: fillBar 2s ease forwards; }
+
+.bar.xd::after { width: 90%; background: #e63946; } .bar.figma::after { width: 85%; background: #ffbe0b; } .bar.ai::after { width: 75%; background: #fb5607; } .bar.ps::after { width: 80%; background: #3a86ff; } .bar.html::after { width: 88%; background: #8338ec; } .bar.css::after { width: 82%; background: #06d6a0; }
+
+ul { list-style: square; margin-left: 1.5rem; }
+
+footer { text-align: center; font-size: 0.9rem; border-top: 1px dashed var(--accent); padding-top: 1rem; }
+
+/* Animations */
+
+@keyframes slideIn { 0% { transform: translateY(40px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+
+@keyframes fillBar { from { width: 0%; } }
+
+@media screen and (max-width: 600px) { .avatar { width: 100px; height: 100px; }
+
+h1 { font-size: 1.6rem; }
+
+.tagline { font-size: 1rem; }
+
+h2 { font-size: 1.2rem; }
+
+.skill span { width: 100px; } }
+
