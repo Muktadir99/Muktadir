@@ -1,61 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Daily AI Blog</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Blog | Muktadir Rahaman Molla</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  font-family: system-ui, sans-serif;
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 16px;
-  color: #111;
-}
-h1 { font-size: 2.2rem; }
-.post {
-  padding: 16px 0;
-  border-bottom: 1px solid #eee;
-}
-.post a {
-  font-size: 1.1rem;
-  text-decoration: none;
-  color: #0066cc;
-}
-.date {
-  color: #777;
-  font-size: 0.85rem;
-}
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <div class="container">
 
-<h1>Daily AI Blog</h1>
-<p>Auto-generated AI tools explained clearly.</p>
+    <header>
+      <h1>Daily AI Blog</h1>
+      <p class="tagline">
+        Auto generated AI tool explanations and usage guides.
+      </p>
+    </header>
 
-<div id="posts"></div>
+    <section>
+      <h2>Latest Posts</h2>
+      <ul id="blog-list"></ul>
+    </section>
+
+    <footer>
+      <p style="font-size:0.8rem;opacity:0.6;">
+        Part of muktadirmolla.in
+      </p>
+    </footer>
+
+  </div>
 
 <script>
 fetch("https://api.github.com/repos/Muktadir99/Muktadir/contents/blog")
 .then(res => res.json())
 .then(files => {
-  files.filter(f => f.name.endsWith(".md"))
-       .reverse()
-       .forEach(f => {
-         const title = f.name
-           .replace(".md","")
-           .replace(/^\d{4}-\d{2}-\d{2}-/,"")
-           .replace(/-/g," ")
-           .replace(/\b\w/g,c=>c.toUpperCase());
+  const list = document.getElementById("blog-list");
 
-         document.getElementById("posts").innerHTML += `
-           <div class="post">
-             <a href="/post.html?file=${f.name}">${title}</a>
-             <div class="date">${f.name.substring(0,10)}</div>
-           </div>`;
-       });
+  files
+    .filter(f => f.name.endsWith(".md"))
+    .reverse()
+    .forEach(f => {
+      const title = f.name
+        .replace(".md","")
+        .replace(/^\d{4}-\d{2}-\d{2}-/,"")
+        .replace(/-/g," ")
+        .replace(/\b\w/g,c=>c.toUpperCase());
+
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="/post.html?file=${f.name}">${title}</a>`;
+      list.appendChild(li);
+    });
 });
 </script>
 
