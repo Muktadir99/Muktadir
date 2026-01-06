@@ -45,20 +45,33 @@
 <ul id="blog-list"></ul>
 
 <script>
-  const posts = [
-    // n8n will append new posts here later if needed
-  ];
+  const blogList = document.getElementById("blog-list");
 
-  const list = document.getElementById("blog-list");
+  fetch("https://api.github.com/repos/muktadir99/muktadir99.github.io/contents/blog")
+    .then(res => res.json())
+    .then(files => {
+      files
+        .filter(file => file.name.endsWith(".md"))
+        .reverse()
+        .forEach(file => {
+          const li = document.createElement("li");
 
-  posts.reverse().forEach(post => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <a href="${post.url}">${post.title}</a>
-      <div class="date">${post.date}</div>
-    `;
-    list.appendChild(li);
-  });
+          const title = file.name
+            .replace(".md", "")
+            .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+            .replace(/-/g, " ");
+
+          li.innerHTML = `
+            <a href="/blog/${file.name}">${title}</a>
+            <div class="date">${file.name.substring(0,10)}</div>
+          `;
+
+          blogList.appendChild(li);
+        });
+    })
+    .catch(() => {
+      blogList.innerHTML = "<li>Unable to load blog posts.</li>";
+    });
 </script>
 
 </body>
