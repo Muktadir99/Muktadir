@@ -47,7 +47,7 @@
 <script>
   const blogList = document.getElementById("blog-list");
 
-  fetch("https://api.github.com/repos/muktadir99/muktadir99.github.io/contents/blog")
+  fetch("https://api.github.com/repos/Muktadir99/Muktadir/contents/blog")
     .then(res => res.json())
     .then(files => {
       files
@@ -69,7 +69,8 @@
           blogList.appendChild(li);
         });
     })
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
       blogList.innerHTML = "<li>Unable to load blog posts.</li>";
     });
 </script>
