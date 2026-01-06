@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 16px;
+  line-height: 1.8;
+  color: #111;
+}
+h1, h2 { margin-top: 1.6em; }
+pre {
+  background: #f6f8fa;
+  padding: 12px;
+  overflow-x: auto;
+}
+code {
+  font-family: monospace;
+}
+a { color: #0066cc; }
+.back {
+  margin-bottom: 20px;
+  display: inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<a class="back" href="/blog.html">← Back to Blog</a>
+
+<article id="content">Loading…</article>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const file = params.get("file");
+
+fetch(`https://raw.githubusercontent.com/Muktadir99/Muktadir/main/blog/${file}`)
+.then(res => res.text())
+.then(md => {
+  document.getElementById("content").innerHTML = marked.parse(md);
+});
+</script>
+
+</body>
+</html>
