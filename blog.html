@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog | Muktadir</title>
+  <title>Daily AI Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -22,7 +23,7 @@
       padding: 0;
     }
     li {
-      margin-bottom: 0.6rem;
+      margin-bottom: 1rem;
     }
     a {
       text-decoration: none;
@@ -33,7 +34,7 @@
     }
     .date {
       color: #666;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -54,23 +55,21 @@
         .filter(file => file.name.endsWith(".md"))
         .reverse()
         .forEach(file => {
-          const li = document.createElement("li");
-
           const title = file.name
             .replace(".md", "")
             .replace(/^\d{4}-\d{2}-\d{2}-/, "")
             .replace(/-/g, " ");
 
+          const li = document.createElement("li");
           li.innerHTML = `
             <a href="/blog/${file.name}">${title}</a>
             <div class="date">${file.name.substring(0,10)}</div>
           `;
-
           blogList.appendChild(li);
         });
     })
     .catch(err => {
-      console.error(err);
+      console.error("Blog load error", err);
       blogList.innerHTML = "<li>Unable to load blog posts.</li>";
     });
 </script>
